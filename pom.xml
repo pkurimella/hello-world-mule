@@ -13,7 +13,7 @@
 
     <properties>
         <munit.version>2.1.2</munit.version>
-    <mule.maven.plugin.version>3.3.5</mule.maven.plugin.version>
+    	<mule.maven.plugin.version>3.3.5</mule.maven.plugin.version>
     </properties>
 
     <build>
@@ -31,7 +31,17 @@
                 <extensions>true</extensions>
                 <configuration>
                     <classifier>mule-application</classifier>
-                </configuration>
+                     <cloudHubDeployment>
+				      <uri>https://anypoint.mulesoft.com</uri>
+				      <muleVersion>${app.runtime}</muleVersion>
+				      <username>${anypoint.username}</username>
+				      <password>${anypoint.password}</password>
+				      <applicationName>${cloudhub.application.name}</applicationName>
+				      <environment>${environment}</environment>
+                      <businessGroup>${businessGroup}</businessGroup>
+                      <workerType>${workerType}</workerType>
+				    </cloudHubDeployment>
+                </configuration>      
             </plugin>
             <plugin>
                 <groupId>com.mulesoft.munit.tools</groupId>
