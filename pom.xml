@@ -14,6 +14,7 @@
     <properties>
         <munit.version>2.1.2</munit.version>
     	<mule.maven.plugin.version>3.3.5</mule.maven.plugin.version>
+    	<cloudhub.application.name>Sample-Hello-World-Shadow</cloudhub.application.name>
     </properties>
 
     <build>
