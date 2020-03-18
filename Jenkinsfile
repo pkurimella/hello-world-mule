@@ -9,7 +9,7 @@ pipeline {
     }
     tools {
         maven 'M3'
-        java 'J191'
+
     } 
     stages{
         
