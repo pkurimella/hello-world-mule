@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    
-    <groupId>com.openlogix</groupId>
+    <parent>
+        <groupId>org.mule.examples</groupId>
+        <artifactId>examples-catalog</artifactId>
+        <version>2.1.4</version>
+    </parent>
+
     <modelVersion>4.0.0</modelVersion>
     <artifactId>hello-world</artifactId>
     <packaging>mule-application</packaging>
     <name>hello-world</name>
     <version>2.1.4</version>
-
     <properties>
         <munit.version>2.2.3</munit.version>
     	<mule.maven.plugin.version>3.3.5</mule.maven.plugin.version>
