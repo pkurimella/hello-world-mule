@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <!-- <parent>
         <groupId>org.mule.examples</groupId>
@@ -13,8 +13,8 @@
     <version>2.1.41</version>
     <properties>
         <munit.version>2.2.3</munit.version>
-    	<mule.maven.plugin.version>3.3.5</mule.maven.plugin.version>
-    	<cloudhub.application.name>Sample-Hello-World-Shadow</cloudhub.application.name>
+        <mule.maven.plugin.version>3.3.5</mule.maven.plugin.version>
+        <cloudhub.application.name>Sample-Hello-World-Shadow</cloudhub.application.name>
     </properties>
 
     <build>
@@ -32,17 +32,17 @@
                 <extensions>true</extensions>
                 <configuration>
                     <classifier>mule-application</classifier>
-                     <cloudHubDeployment>
-				      <uri>https://anypoint.mulesoft.com</uri>
-				      <muleVersion>${app.runtime}</muleVersion>
-				      <username>${anypoint.username}</username>
-				      <password>${anypoint.password}</password>
-				      <applicationName>${cloudhub.application.name}</applicationName>
-				      <environment>${environment}</environment>
-                      <businessGroup>${businessGroup}</businessGroup>
-                      <workerType>${workerType}</workerType>
-				    </cloudHubDeployment>
-                </configuration>      
+                    <cloudHubDeployment>
+                        <uri>https://anypoint.mulesoft.com</uri>
+                        <muleVersion>${app.runtime}</muleVersion>
+                        <username>${anypoint.username}</username>
+                        <password>${anypoint.password}</password>
+                        <applicationName>${cloudhub.application.name}</applicationName>
+                        <environment>${environment}</environment>
+                        <businessGroup>${businessGroup}</businessGroup>
+                        <workerType>${workerType}</workerType>
+                    </cloudHubDeployment>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>com.mulesoft.munit.tools</groupId>
@@ -69,7 +69,7 @@
                 </configuration>
             </plugin>
         </plugins>
-     </build>
+    </build>
     <dependencies>
         <dependency>
             <groupId>org.mule.connectors</groupId>
@@ -84,14 +84,14 @@
             <version>1.1.5</version>
             <classifier>mule-plugin</classifier>
         </dependency>
-    	<dependency>
+        <dependency>
             <groupId>com.mulesoft.munit</groupId>
             <artifactId>munit-tools</artifactId>
             <version>2.2.4</version>
             <classifier>mule-plugin</classifier>
             <scope>test</scope>
         </dependency>
-    	<dependency>
+        <dependency>
             <groupId>com.mulesoft.munit</groupId>
             <artifactId>munit-runner</artifactId>
             <version>2.2.4</version>
@@ -124,12 +124,12 @@
             <url>https://repository.mulesoft.org/nexus/content/repositories/public/</url>
             <layout>default</layout>
         </repository> -->
-    </repositories> 
+    </repositories>
     <distributionManagement>
         <repository>
-          <id>github</id>
-          <name>GitHub OWNER Apache Maven Packages</name>
-          <url>https://maven.pkg.github.com/pkurimella/hello-world-mule</url>
+            <id>github</id>
+            <name>GitHub OWNER Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/pkurimella/hello-world-mule</url>
         </repository>
-     </distributionManagement>
+    </distributionManagement>
 </project>
