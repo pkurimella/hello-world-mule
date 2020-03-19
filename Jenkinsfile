@@ -49,56 +49,70 @@ pipeline {
             }
         }
         
-        // stage('Push Release Branch') {
-        //     steps {
-        //         script {
-        //             echo "Starting Push Release Branch..."
-        //             // Success
-        //             //sh "git add pom.xml"
-        //             //sh "ssh -vT -o StrictHostKeyChecking=no git@github.com"
-        //             //sh "ssh -vvv -o StrictHostKeyChecking=no git@github.com"
-        //             sh "ssh -v -T -i /var/lib/jenkins/.ssh/id_rsa git@github.com:"
-        //             sh "git add ."
-        //             sh 'git commit -m "Committing Branch"'
-        //             sh "git remote set-url origin git@github.com:pkurimella/employee-system-api.git"
-        //             sh "git push -u origin '${env.BUILD_VERSION}'"
-        //         } 
-        //     }
-        //     post {
-        //         success {
-        //             echo "...Push Release Branch Succeeded for ${env.BUILD_VERSION}: ${currentBuild.currentResult}"
-        //         } 
-        //         unsuccessful {
-        //             echo "...Push Release Branch Failed for ${env.BUILD_VERSION}: ${currentBuild.currentResult}"
-        //             script {
-        // 	            dropLocalReleaseBranch()
-        //             }
-        //         }
-        //     }
-        // }
-
-        stage('Clean up Local Release Branch') {
+        stage('Push Release Branch') {
             steps {
                 script {
-                    echo "Starting Clean Release Branch..."
+                    echo "Starting Push Release Branch..."
+                    withCredentials([usernamePassword(credentialsId: 'Github', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                      // available as an env variable, but will be masked if you try to print it out any which way
+                      // note: single quotes prevent Groovy interpolation; expansion is by Bourne Shell, which is what you want
+                      sh 'echo $PASSWORD'
+                      // also available as a Groovy variable
+                      echo USERNAME
+                      // or inside double quotes for string interpolation
+                      echo "username is $USERNAME"
+                      sh "git add ."
+                        sh 'git commit -m "Committing Branch"'
+                        //sh "git remote set-url origin git@github.com:pkurimella/employee-system-api.git"
+                        sh 'git push https://$USERNAME:$PASSWORD@github.com/pkurimella/hello-world-mule.git --all'
+                        sh "git push -u origin '${env.BUILD_VERSION}'"
+                    }
                     // Success
+                    //sh "git add pom.xml"
+                    //sh "ssh -vT -o StrictHostKeyChecking=no git@github.com"
+                    //sh "ssh -vvv -o StrictHostKeyChecking=no git@github.com"
+                    //sh "ssh -v -T -i /var/lib/jenkins/.ssh/id_rsa git@github.com:"
                     sh "git add ."
                     sh 'git commit -m "Committing Branch"'
-                    //dropLocalReleaseBranch()
+                    //sh "git remote set-url origin git@github.com:pkurimella/employee-system-api.git"
+                    sh "git push -u origin '${env.BUILD_VERSION}'"
                 } 
             }
             post {
                 success {
-                    echo "...Clean Release Branch Succeeded for ${env.BUILD_VERSION}: ${currentBuild.currentResult}"
+                    echo "...Push Release Branch Succeeded for ${env.BUILD_VERSION}: ${currentBuild.currentResult}"
                 } 
                 unsuccessful {
-                    echo "...Clean Release Branch Failed for ${env.BUILD_VERSION}: ${currentBuild.currentResult}"
+                    echo "...Push Release Branch Failed for ${env.BUILD_VERSION}: ${currentBuild.currentResult}"
                     script {
         	            dropLocalReleaseBranch()
                     }
                 }
             }
         }
+
+        // stage('Clean up Local Release Branch') {
+        //     steps {
+        //         script {
+        //             echo "Starting Clean Release Branch..."
+        //             // Success
+        //             sh "git add ."
+        //             sh 'git commit -m "Committing Branch"'
+        //             //dropLocalReleaseBranch()
+        //         } 
+        //     }
+        //     post {
+        //         success {
+        //             echo "...Clean Release Branch Succeeded for ${env.BUILD_VERSION}: ${currentBuild.currentResult}"
+        //         } 
+        //         unsuccessful {
+        //             echo "...Clean Release Branch Failed for ${env.BUILD_VERSION}: ${currentBuild.currentResult}"
+        //             script {
+        // 	            dropLocalReleaseBranch()
+        //             }
+        //         }
+        //     }
+        // }
         
         stage('Deploy Artifact') {
             steps {
