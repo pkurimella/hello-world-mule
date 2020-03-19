@@ -33,7 +33,7 @@ pipeline {
         stage('Build and Test') {
             steps {
                 echo "Starting Build and Test..."
-                sh "mvn -Dmaven.test.failure.ignore clean verify"
+                //sh "mvn -Dmaven.test.failure.ignore clean verify"
                 echo "Build and Test: ${currentBuild.currentResult}"
             }
             post {
@@ -63,7 +63,7 @@ pipeline {
                       echo "username is $USERNAME"
                       sh "git add ."
                       sh 'git commit -m "Committing Branch"'
-                      sh 'git push https://$USERNAME:$PASSWORD@github.com/pkurimella/hello-world-mule.git -u origin ${env.BUILD_VERSION}'
+                      sh 'git push https://$USERNAME:$PASSWORD@github.com/pkurimella/hello-world-mule.git -all'
                         //sh "git push -u origin '${env.BUILD_VERSION}'"
                     }
                 } 
