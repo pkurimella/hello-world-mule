@@ -10,7 +10,7 @@
     <artifactId>hello-world</artifactId>
     <packaging>mule-application</packaging>
     <name>hello-world</name>
-    <version>2.1.41</version>
+    <version>2.1.41-39-SNAPSHOT</version>
     <properties>
         <munit.version>2.2.3</munit.version>
         <mule.maven.plugin.version>3.3.5</mule.maven.plugin.version>
@@ -138,7 +138,7 @@
             <url>https://repository.mulesoft.org/releases/</url>
             <layout>default</layout>
         </repository>
-        <!-- <repository>
+        <repository>
             <id>mulesoft-snapshots</id>
             <name>MuleSoft Snapshot Repository</name>
             <url>http://repository.mulesoft.org/snapshots/</url>
@@ -149,7 +149,7 @@
             <name>MuleSoft Public Repository</name>
             <url>https://repository.mulesoft.org/nexus/content/repositories/public/</url>
             <layout>default</layout>
-        </repository> -->
+        </repository>
     </repositories>
     <distributionManagement>
         <repository>
