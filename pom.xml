@@ -18,12 +18,12 @@
     </properties>
 
     <build>
-        <testResources>
+        <!-- <testResources>
             <testResource>
                 <directory>src/test/munit</directory>
                 <filtering>true</filtering>
             </testResource>
-        </testResources>
+        </testResources> -->
         <plugins>
             <plugin>
                 <groupId>org.mule.tools.maven</groupId>
