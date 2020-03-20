@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <parent>
+    <!-- <parent>
         <groupId>org.mule.examples</groupId>
         <artifactId>examples-catalog</artifactId>
         <version>2.1.4</version>
-    </parent>
+    </parent> -->
     <groupId>com.openlogix</groupId>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>hello-world</artifactId>
@@ -13,7 +13,7 @@
     <version>2.1.41</version>
     <properties>
         <munit.version>2.2.3</munit.version>
-        <mule.maven.plugin.version>3.3.5</mule.maven.plugin.version>
+        <mule.maven.plugin.version>3.1.5</mule.maven.plugin.version>
         <cloudhub.application.name>Sample-Hello-World-Shadow</cloudhub.application.name>
     </properties>
     <build>
