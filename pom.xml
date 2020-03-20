@@ -65,7 +65,7 @@
                             <format>html</format>
                         </formats>
                     </coverage>
-                    <!-- <runtimeVersion>4.2.0</runtimeVersion> -->
+                    <runtimeVersion>4.2.2</runtimeVersion>
                 </configuration>
             </plugin>
         </plugins>
