@@ -10,7 +10,7 @@
     <artifactId>hello-world</artifactId>
     <packaging>mule-application</packaging>
     <name>hello-world</name>
-    <version>2.1.41-37-SNAPSHOT</version>
+    <version>2.1.41</version>
     <properties>
         <munit.version>2.2.3</munit.version>
         <mule.maven.plugin.version>3.3.5</mule.maven.plugin.version>
