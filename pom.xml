@@ -16,7 +16,6 @@
         <mule.maven.plugin.version>3.3.5</mule.maven.plugin.version>
         <cloudhub.application.name>Sample-Hello-World-Shadow</cloudhub.application.name>
     </properties>
-
     <build>
         <!-- <testResources>
             <testResource>
@@ -28,7 +27,7 @@
             <plugin>
                 <groupId>org.mule.tools.maven</groupId>
                 <artifactId>mule-maven-plugin</artifactId>
-                <version>${mule.maven.plugin.version}</version>
+                <version>3.3.5</version>
                 <extensions>true</extensions>
                 <configuration>
                     <classifier>mule-application</classifier>
