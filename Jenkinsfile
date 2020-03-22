@@ -1,11 +1,8 @@
 pipeline {
     agent any
     environment {
-        //BUILD_VERSION = "v${currentBuild.number}.RELEASE"
-        //BUILD_VERSION = "1.0.0-SNAPSHOT.RELEASE"
         pomVersion = readMavenPom().getVersion()
         BUILD_VERSION =  "${pomVersion}-${currentBuild.number}-SNAPSHOT"
-        //echo "${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.nextIncrementalVersion}-${parsedVersion.qualifier}"
     }
     tools {
         maven 'M3'
@@ -109,68 +106,28 @@ pipeline {
         
         stage('Deploy to Development') {
             steps {
-                script {
-                    echo "Starting Deploy to Development"
-                        
                     //applicationName = readMavenPom().getArtifactId()
                     //echo "applicationName=${applicationName}"
-                    
-                    props = readProperties(file: '/tmp/Jenkins/employee-system-api/deploy.properties')
-                    muleVersion = props['muleVersion']
-                    environment = props['environment']
-                    applicationName = props['cloudhub.applicationName']
-                    //anypointUsername = props['anypoint.username']
-                    //anypointPassword = props['anypoint.password']
-                    businessGroup = props['businessGroup']
-                    cloudhubRegion = props['cloudhub.region']
-                    cloudhubWorkerType = props['cloudhub.workerType']
-                    cloudhubWorkers = props['cloudhub.workers']
-                    cloudhubEnvClientID = props['cloudhub.env.client_id']
-                    cloudhubEnvSecretID = props['cloudhub.env.client_secret']
-        
-                    // echo "anypointMuleVersion=${anypointMuleVersion}"
-                    // echo "anypointMuleEnvironment=${anypointMuleEnvironment}"
-                    // echo "anypointUsername=${anypointUsername}"
-                    // echo "anypointPassword=${anypointPassword}"
-                    // echo "cloudhubEnv=${cloudhubEnv}"
-                    // echo "cloudhubRegion=${cloudhubRegion}"
-                    // echo "cloudhubWorkerType=${cloudhubWorkerType}"
-                    // echo "cloudhubWorkers=${cloudhubWorkers}"
-                    // echo "cloudhubEnvClientID=${cloudhubEnvClientID}"
-                    // echo "cloudhubEnvSecretID=${cloudhubEnvSecretID}"
-                        
-                    echo "Deploy to Development: ${currentBuild.currentResult}"
-                }
-                
-                //configFileProvider([configFile(fileId: '107138b1-fdbe-45c5-8eb3-64a520257c07', targetLocation: 'settings.xml', variable: 'MAVEN_SETTINGS_XML')]) {
-                    // Run the maven build
-                    // sh """ mvn -U --batch-mode -s $MAVEN_SETTINGS_XML \
-                    //     -Dmule.version=${anypointMuleVersion}  \
-                    //     -Danypoint.applicationName=${applicationName} \
-                    //     -Danypoint.mule.environment=${anypointMuleEnvironment} \
-                    //     -Danypoint.username=${anypointUsername} \
-                    //     -Danypoint.password=${anypointPassword} \
-                    //     -Dcloudhub.env=${cloudhubEnv} \
-                    //     -Dcloudhub.region=${cloudhubRegion} \
-                    //     -Dcloudhub.workerType=${cloudhubWorkerType} \
-                    //     -Dcloudhub.workers=${cloudhubWorkers} \
-                    //     -Dcloudhub.env.client_id=${cloudhubEnvClientID} \
-                    //     -Dcloudhub.env.client_secret=${cloudhubEnvSecretID} \
-                    //     clean install mule:deploy -P cloudhub """
-                    sh """ mvn deploy -U --batch-mode \
+                    withCredentials([file(credentialsId: 'Hello-Props', variable: 'FILE')]) {
+                        echo "Getting Env Variables"
+                        script{
+                        //use $FILE
+                            def props = readProperties file: FILE
+                            env['muleVersion'] = props['muleVersion']
+                            env['environment'] = props['environment']
+                            env['businessGroup'] = props['businessGroup']
+                        }
+                        echo "this is me '${env.muleVersion}'"
+                        echo "this is me '${env.environment}'"
+                        echo "this is me '${env.businessGroup}'"
+                    }
+                    sh """ mvn clean deploy -U --batch-mode \
                         -DmuleDeploy \
                         -DskipMunitTests \
-                        -Dmule.version=${muleVersion}  \
-                        -Danypoint.applicationName=${applicationName} \
-                        -Denvironment=${environment} \
-                        -DworkerType=${cloudhubWorkerType} \
-                        -Dworkers=${cloudhubWorkers} \
-                        -DbusinessGroup="${businessGroup}" \
-                        -Dcloudhub.env.client_id=${cloudhubEnvClientID} \
-                        -Dcloudhub.env.client_secret=${cloudhubEnvSecretID} \
+                        -Dmule.version=${env.muleVersion}  \
+                        -Denvironment=${env.environment} \
+                        -DbusinessGroup="${env.businessGroup}" \
                         -Dmule.env=dev"""
-
-                //}
             }
             post {
                 success {

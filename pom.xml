@@ -1,47 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <!-- <parent>
-        <groupId>org.mule.examples</groupId>
-        <artifactId>examples-catalog</artifactId>
-        <version>2.1.4</version>
-    </parent> -->
     <groupId>com.openlogix</groupId>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>hello-world</artifactId>
     <packaging>mule-application</packaging>
-    <name>hello-world</name>
-    <version>2.1.41</version>
+    <name>hello-world-sample</name>
+    <version>2.1.42</version>
     <properties>
         <munit.version>2.2.3</munit.version>
         <mule.maven.plugin.version>3.3.5</mule.maven.plugin.version>
-        <cloudhub.application.name>Sample-Hello-World-Shadow</cloudhub.application.name>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <app.runtime>4.1.1</app.runtime>
-        <!-- <mule.maven.plugin.version>3.1.5</mule.maven.plugin.version> -->
-        <mule.apikit.version>1.1.6</mule.apikit.version>
-        <mule.soapapikit.version>1.1.2</mule.soapapikit.version>
-        <db.connector.version>1.3.1</db.connector.version>
-        <email.connector.version>1.0.2</email.connector.version>
-        <file.connector.version>1.1.2</file.connector.version>
-        <ftp.connector.version>1.1.3</ftp.connector.version>
-        <http.connector.version>1.2.0</http.connector.version>
-        <java.module.version>1.0.0</java.module.version>
-        <jms.connector.version>1.2.1</jms.connector.version>
-        <netsuite.connector.version>8.1.0</netsuite.connector.version>
-        <oauth.module.version>1.1.1</oauth.module.version>
-        <objectstore.connector.version>1.1.0</objectstore.connector.version>
-        <sfdc.connector.version>9.3.0</sfdc.connector.version>
-        <scripting.module.version>1.1.2</scripting.module.version>
-        <servicenow.connector.version>6.2.0</servicenow.connector.version>
-        <sftp.connector.version>1.1.2</sftp.connector.version>
-        <sap.connector.version>4.0.0</sap.connector.version>
-        <sockets.connector.version>1.1.1</sockets.connector.version>
-        <spring.module.version>1.1.0</spring.module.version>
-        <validation.module.version>1.2.1</validation.module.version>
-        <vm.module.version>1.1.1</vm.module.version>
-        <wsc.connector.version>1.1.1</wsc.connector.version>
-        <workday.connector.version>9.2.0</workday.connector.version>
+        <cloudhub.application.name>hello-world-sample-sandbox</cloudhub.application.name>
+        <target>Azure-VM-PK</target>
+        <target.type>server</target.type>
     </properties>
     <build>
         <!-- <testResources>
@@ -58,7 +28,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <classifier>mule-application</classifier>
-                    <cloudHubDeployment>
+                    <!-- <cloudHubDeployment>
                         <uri>https://anypoint.mulesoft.com</uri>
                         <muleVersion>${app.runtime}</muleVersion>
                         <username>${anypoint.username}</username>
@@ -67,7 +37,22 @@
                         <environment>${environment}</environment>
                         <businessGroup>${businessGroup}</businessGroup>
                         <workerType>${workerType}</workerType>
-                    </cloudHubDeployment>
+                    </cloudHubDeployment> -->
+                    <armDeployment>
+                        <muleVersion>${app.runtime}</muleVersion>
+                        <uri>https://anypoint.mulesoft.com</uri>
+                        <target>${target}</target>
+                        <targetType>${target.type}</targetType>
+                        <!-- <username>${username}</username>
+                        <password>${password}</password> -->
+                        <server>my.anypoint.credentials</server>
+                        <environment>${environment}</environment>
+                        <!-- <properties>
+                            <key>value</key>
+                        </properties> -->
+                        <businessGroup>${businessGroup}</businessGroup>
+                        <applicationName>${cloudhub.application.name}</applicationName>
+                    </armDeployment>
                 </configuration>
             </plugin>
             <plugin>
@@ -103,7 +88,11 @@
             <version>1.5.14</version>
             <classifier>mule-plugin</classifier>
         </dependency>
-
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>23.6.1-jre</version>
+        </dependency>
         <dependency>
             <groupId>org.mule.connectors</groupId>
             <artifactId>mule-sockets-connector</artifactId>
