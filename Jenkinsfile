@@ -124,7 +124,7 @@ pipeline {
                     sh """ mvn clean deploy -U --batch-mode \
                         -DmuleDeploy \
                         -DskipMunitTests \
-                        -Dmule.version=${env.muleVersion}  \
+                        -Dapp.runtime=${env.muleVersion}  \
                         -Denvironment=${env.environment} \
                         -DbusinessGroup="${env.businessGroup}" \
                         -Dmule.env=dev"""
