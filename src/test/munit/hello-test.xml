@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd 
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="new-test-suite.xml" />
+<!-- 	<import file="hello-world-mule.xml" doc:name="Import" doc:id="3fdd0df0-1b67-4b80-b01c-b9a8ffbdc859" /> -->
+	
+<!-- 	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="f3d95a99-8989-4228-aef0-25f4073e55be" responseTimeout="90000" > -->
+<!-- 		<http:request-connection host="0.0.0.0" port="8084"/> -->
+<!-- 	</http:request-config> -->
+	<munit:test name="new-test-suite-hello-worldFlowTest" doc:id="a47e21db-bd7d-4d2b-9207-1fc1ce30c868" description="Test">
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to hello-worldFlow" doc:id="473a5c65-1ad6-43f4-88ef-5288ce5b9964" name="hello-worldFlow"/>
+		</munit:execution>
+<!-- 		<munit:execution> -->
+<!-- 			<http:request method="GET" path="/helloWorld" config-ref="HTTP_Request_configuration" doc:name="Request" /> -->
+<!-- 		</munit:execution> -->
+		<munit:validation>
+			<munit-tools:assert-that expression="#[payload]" is="#[MunitTools::equalTo('Hello World! This is a Mule App!!')]" doc:name="Assert response body" />
+			<!-- <munit-tools:assert-that doc:name="Assert response status" doc:id="8161f111-40e5-4118-b4e1-b0335d5071ab" expression="#[attributes.statusCode]" is="#[MunitTools::equalTo(200)]" />
+			<munit-tools:assert-that doc:name="Assert content type" doc:id="ebcc73d6-78f8-4939-bba1-ca50a70a1548" expression="#[attributes.headers['content-type']]" is="#[MunitTools::equalTo('text/plain')]" /> -->
+		</munit:validation>
+	</munit:test>
+
+</mule>
