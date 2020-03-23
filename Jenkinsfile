@@ -30,7 +30,7 @@ pipeline {
         stage('Build and Test') {
             steps {
                 echo "Starting Build and Test..."
-                //sh "mvn -Dmaven.test.failure.ignore clean verify"
+                sh "mvn -Dmaven.test.failure.ignore clean verify"
                 echo "Build and Test: ${currentBuild.currentResult}"
             }
             post {
@@ -121,7 +121,7 @@ pipeline {
                         echo "this is me '${env.environment}'"
                         echo "this is me '${env.businessGroup}'"
                     }
-                    sh """ mvn clean deploy -U --batch-mode \
+                    sh """ mvn deploy -U --batch-mode \
                         -DmuleDeploy \
                         -DskipMunitTests \
                         -Dapp.runtime=${env.muleVersion}  \
